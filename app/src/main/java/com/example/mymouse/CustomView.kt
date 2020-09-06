@@ -28,9 +28,13 @@ class MarioView(context: Context) : View(context) {
 
         //繪製圖像
         canvas.drawBitmap(bitmap, bitmapX, bitmapY, paint)
+    }
 
-        //判斷被回收
-        if (bitmap.isRecycled) {
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+
+        //判斷未被回收
+        if (!bitmap.isRecycled) {
             //當確定點陣圖不被使用時，才可調用 recycle
             bitmap.recycle()
         }
